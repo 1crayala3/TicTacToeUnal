@@ -26,8 +26,8 @@ class _AloneChState extends State<AloneCh> {
                 Flexible(
                   flex: 5,
                   child: Container(
-                    //color: Colors.red,
-                    height: 500.h,
+                     //color: Colors.red,
+                      height: 500.h,
                       padding: EdgeInsets.all(3.h),
                     child: Center(
                         child: Text('Player', style: TextStyle(color: Colors.black, fontSize: 10.h, fontFamily: 'Popkorn'))

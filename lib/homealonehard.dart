@@ -1,6 +1,7 @@
 import 'package:final_project/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:sizer/sizer.dart';
 
 class BoardAloneJZ extends StatefulWidget {
   final String characterP1, avatarP1;
@@ -33,127 +34,138 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
   int drawCount = 0;
   var random = new Random();
   bool someoneWon = false;
-  //String character = '';
+  bool _deactTch = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          Flexible(
-            flex: 3,
-            //padding: EdgeInsets.fromLTRB(5, 20, 5, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 40, 35, 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(widget.characterP1, style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: 'ArcadeF')),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(widget.avatarP1),
-                          radius: 50.0,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(1),
-                        child: Row(
-                          children: [
-                            Text('X', style: TextStyle(color: Colors.white, fontSize: 40, fontFamily: 'ArcadeF')),
-                            Text('  =  ', style: TextStyle(color: Colors.white, fontSize: 40, fontFamily: 'ArcadeF')),
-                            Text(xScr.toString(), style: TextStyle(color: Colors.lightGreen[600], fontSize: 40, fontFamily: 'ArcadeF')),
-                          ],
-                        ),
-                      ),
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Flexible(
+              flex: 5,
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:[
+                    Container(
+                      padding: EdgeInsets.fromLTRB(1.w, 5.5.h, 3.w, 0.h),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(widget.characterP1, style: TextStyle(color: Colors.white, fontSize: 3.h, fontFamily: 'ArcadeF')),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0.w, 2.h, 0.w, 2.h),
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage(widget.avatarP1),
+                              radius: 6.5.h,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(0.1.h),
+                            child: Row(
+                              children: [
+                                Text('X', style: TextStyle(color: Colors.white, fontSize: 3.5.h, fontFamily: 'ArcadeF')),
+                                Text('  =  ', style: TextStyle(color: Colors.white, fontSize: 3.h, fontFamily: 'ArcadeF')),
+                                Text(xScr.toString(), style: TextStyle(color: Colors.lightGreen[600], fontSize: 3.5.h, fontFamily: 'ArcadeF')),
+                              ],
+                            ),
+                          ),
 
-                    ],
-                  ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(3.w, 5.5.h, 1.w, 0.h),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+
+                          Text('Overlord', style: TextStyle(color: Colors.white, fontSize: 3.h, fontFamily: 'ArcadeF')),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0.w, 2.h, 0.w, 2.h),
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage('assets/Uribe.jpg'),
+                              radius: 6.5.h,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(0.1.h),
+                            child: Row(
+                              children: [
+                                Text('O', style: TextStyle(color: Colors.white, fontSize: 3.5.h, fontFamily: 'ArcadeF')),
+                                Text('  =  ', style: TextStyle(color: Colors.white, fontSize: 3.h, fontFamily: 'ArcadeF')),
+                                Text(oScr.toString(), style: TextStyle(color: Colors.lightGreen[600], fontSize: 3.5.h, fontFamily: 'ArcadeF')),
+                              ],
+                            ),
+                          ),
+
+
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(35, 40, 10, 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-
-                      Text('Overlord', style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: 'ArcadeF')),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage('assets/Uribe.jpg'),
-                          radius: 50.0,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(1),
-                        child: Row(
-                          children: [
-                            Text('O', style: TextStyle(color: Colors.white, fontSize: 40, fontFamily: 'ArcadeF')),
-                            Text('  =  ', style: TextStyle(color: Colors.white, fontSize: 40, fontFamily: 'ArcadeF')),
-                            Text(oScr.toString(), style: TextStyle(color: Colors.lightGreen[600], fontSize: 40, fontFamily: 'ArcadeF')),
-                          ],
-                        ),
-                      ),
-
-
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
 
-          Expanded(
-            flex: 5,
-            child: GridView.builder(
-                itemCount: 9,
-                gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: (){
-                      touched(index);
+            Flexible(
+              flex: 9,
+              child: AbsorbPointer(
+                absorbing: _deactTch,
+                child: Container(
+                  child: GridView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: 9,
+                      gridDelegate:
+                      SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: (){
+                            touched(index);
 
-                    },
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white30)
+                              ),
+                              child: Center(
+                                child: Text(exOrO[index],
+                                    style: TextStyle(color: Colors.white, fontSize: 10.h, fontFamily: 'ArcadeF')),
+                              )),
+                        );
+                      }),
+                ),
+              ),
+            ),
+            Flexible(
+              flex: 2,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
+                },
+                child: Container(
+                  height: 7.h,
+                  padding: EdgeInsets.fromLTRB(30.w, 0.h, 30.w, 2.5.h),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
                     child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white30)
-                        ),
-                        child: Center(
-                          child: Text(exOrO[index],
-                              style: TextStyle(color: Colors.white, fontSize: 65, fontFamily: 'ArcadeF')),
-                        )),
-                  );
-                }),
-          ),
-          Flexible(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
-              },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(70,20,70,25),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    color: Colors.lightGreen[700],
-                    child: Center(
-                      child: Text('Exit',
-                          style: TextStyle(color: Colors.black, fontSize: 30, fontFamily: 'ArcadeF')),
+                      padding: EdgeInsets.all(5),
+                      color: Colors.lightGreen[600],
+                      child: Center(
+                        child: Text('Exit',
+                            style: TextStyle(color: Colors.black, fontSize: 3.5.h, fontFamily: 'ArcadeF')),
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-            ),
-          )
-        ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -166,6 +178,7 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
     setState(() {
 
       someoneWon = false;
+      _deactTch = true;
 
       if (exOrO[n] == ''){
         exOrO[n] = 'X';
@@ -189,18 +202,11 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
 
     });
 
+    _deactTch = false;
 
   }
 
 
-
-  void machineTurn() async {
-
-    await Future.delayed(Duration(seconds: 2), () {
-
-    });
-
-  }
 
 
 
@@ -278,16 +284,18 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
 
     showDialog(barrierDismissible: false, context: context, builder: (BuildContext context){
       return AlertDialog(
-        actionsPadding: EdgeInsets.symmetric(horizontal: 10),
-        shape: RoundedRectangleBorder(side: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(25.0))),
+        titlePadding: EdgeInsets.all(3.h),
+        actionsPadding: EdgeInsets.all(0.1.h),
+        buttonPadding: EdgeInsets.all(2.h),
+        shape: RoundedRectangleBorder(side: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30.0))),
         backgroundColor: Colors.grey[800],
         title: Center(child: Text("  " + defeater + '     Wins!',
-            style: TextStyle(color: defColor, fontFamily: 'ArcadeF', fontSize: 25))
+            style: TextStyle(color: defColor, fontFamily: 'ArcadeF', fontSize: 4.h))
         ),
         actions: [
           Center(
             child: TextButton(
-              child: Text('Play Again', style: TextStyle(color: Colors.white, fontFamily: 'Popkorn', fontSize: 40)),
+              child: Text('Play Again', style: TextStyle(color: Colors.white, fontFamily: 'Popkorn', fontSize: 5.h)),
               onPressed: (){
                 resetBoard();
                 Navigator.of(context).pop();
@@ -299,7 +307,7 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
               child: Icon(
                 Icons.play_arrow,
                 color: Colors.white,
-                size: 30.0),
+                size: 5.h),
             ),
               onPressed: (){
                 resetBoard();
@@ -316,16 +324,18 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
   void weHaveADraw() {
     showDialog(barrierDismissible: false, context: context, builder: (BuildContext context){
       return AlertDialog(
-        actionsPadding: EdgeInsets.symmetric(horizontal: 10),
-        shape: RoundedRectangleBorder(side: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(25.0))),
+        titlePadding: EdgeInsets.all(3.h),
+        actionsPadding: EdgeInsets.all(0.1.h),
+        buttonPadding: EdgeInsets.all(2.h),
+        shape: RoundedRectangleBorder(side: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30.0))),
         backgroundColor: Colors.grey[800],
         title: Center(child: Text("It's   a   Draw",
-            style: TextStyle(color: Colors.white60, fontFamily: 'ArcadeF', fontSize: 25))
+            style: TextStyle(color: Colors.white60, fontFamily: 'ArcadeF', fontSize: 4.h))
         ),
         actions: [
           Center(
             child: TextButton(
-              child: Text('Play Again', style: TextStyle(color: Colors.white, fontFamily: 'Popkorn', fontSize: 40)),
+              child: Text('Play Again', style: TextStyle(color: Colors.white, fontFamily: 'Popkorn', fontSize: 5.h)),
               onPressed: (){
                 resetBoard();
                 Navigator.of(context).pop();
@@ -337,7 +347,7 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
               child: Icon(
                   Icons.play_arrow,
                   color: Colors.white,
-                  size: 30.0),
+                  size: 5.h),
             ),
             onPressed: (){
               resetBoard();
@@ -370,7 +380,11 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
 
   void dumbMachine(){
 
-    if ((((exOrO[0] == exOrO[1] && exOrO[0] != '' && exOrO[0] == 'O') ||
+    if (turn == 1 && exOrO[4] == ''){
+      exOrO[4] = 'O';
+    }
+
+    else if ((((exOrO[0] == exOrO[1] && exOrO[0] != '' && exOrO[0] == 'O') ||
         (exOrO[6] == exOrO[4] && exOrO[6] != '' && exOrO[6] == 'O') ||
         (exOrO[5] == exOrO[8] && exOrO[5] != '' && exOrO[5] == 'O')))
         && exOrO[2] == ''){

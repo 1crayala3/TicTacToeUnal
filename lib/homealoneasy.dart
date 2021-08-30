@@ -35,7 +35,7 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
   int drawCount = 0;
   var random = new Random();
   bool someoneWon = false;
-  //String character = '';
+  bool _deactTch = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +43,14 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
       backgroundColor: Colors.black,
       body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Flexible(
               flex: 5,
               child: Container(
+                //color: Colors.red,
                 padding: EdgeInsets.zero,
+                //height: 20.h,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children:[
@@ -58,7 +60,7 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(widget.characterP1, style: TextStyle(color: Colors.white, fontSize: 3.4.h, fontFamily: 'ArcadeF')),
+                          Text(widget.characterP1, style: TextStyle(color: Colors.white, fontSize: 3.h, fontFamily: 'ArcadeF')),
                           Padding(
                             padding: EdgeInsets.fromLTRB(0.w, 2.h, 0.w, 2.h),
                             child: CircleAvatar(
@@ -86,7 +88,7 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
 
-                          Text('Puppet', style: TextStyle(color: Colors.white, fontSize: 3.4.h, fontFamily: 'ArcadeF')),
+                          Text('Puppet', style: TextStyle(color: Colors.white, fontSize: 3.h, fontFamily: 'ArcadeF')),
                           Padding(
                             padding: EdgeInsets.fromLTRB(0.w, 2.h, 0.w, 2.h),
                             child: CircleAvatar(
@@ -104,8 +106,6 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
                               ],
                             ),
                           ),
-
-
                         ],
                       ),
                     ),
@@ -115,30 +115,33 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
             ),
 
             Flexible(
-              flex: 8,
-              child: Container(
-                //color: Colors.cyan,
-                child: GridView.builder(
-                    padding: EdgeInsets.all(0),
-                    itemCount: 9,
-                    gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,),
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: (){
-                          touched(index);
+              flex: 9,
+              child: AbsorbPointer(
+                absorbing: _deactTch,
+                child: Container(
+                  //color: Colors.cyan,
+                  child: GridView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: 9,
+                      gridDelegate:
+                      SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,),
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: (){
+                            touched(index);
 
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white30)
-                            ),
-                            child: Center(
-                              child: Text(exOrO[index],
-                                  style: TextStyle(color: Colors.white, fontSize: 10.h, fontFamily: 'ArcadeF')),
-                            )),
-                      );
-                    }),
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white30)
+                              ),
+                              child: Center(
+                                child: Text(exOrO[index],
+                                    style: TextStyle(color: Colors.white, fontSize: 10.h, fontFamily: 'ArcadeF')),
+                              )),
+                        );
+                      }),
+                ),
               ),
             ),
             Flexible(
@@ -148,25 +151,24 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
                 },
                 child: Container(
-                  //height: 12.h,
+                  height: 7.h,
                   //color: Colors.red,
-                  padding: EdgeInsets.fromLTRB(30.w,3.h,30.w,3.h),
+                  padding: EdgeInsets.fromLTRB(30.w, 0.h, 30.w, 2.5.h),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Container(
-                      //height: 6.5.h,
-                      padding: EdgeInsets.all(1.h),
-                      color: Colors.lightGreen[700],
+                      color: Colors.lightGreen[600],
                       child: Center(
-                        child: Text('Exit',
-                            style: TextStyle(color: Colors.black, fontSize: 3.5.h, fontFamily: 'ArcadeF')),
-                      ),
+                          child: Text('Exit',
+                              style: TextStyle(color: Colors.black, fontSize: 3.5.h, fontFamily: 'ArcadeF')),
+                        ),
+                    ),
                     ),
                   ),
                 ),
 
               ),
-            )
+
           ],
         ),
       ),
@@ -180,12 +182,14 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
     setState(() {
 
       someoneWon = false;
+      _deactTch = true;
 
       if (exOrO[n] == ''){
         exOrO[n] = 'X';
         turn++;
         drawCount++;
       }
+
       victory();
 
     });
@@ -196,6 +200,7 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
       setState(() {
 
         if(someoneWon == false){
+
           dumbMachine();
           victory();
         }
@@ -203,6 +208,7 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
 
     });
 
+    _deactTch = false;
 
   }
 
@@ -257,6 +263,7 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
         xScr++;
       }
     }
+
   }
 
 
@@ -381,6 +388,7 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
     }
     turn++;
     drawCount++;
+
   }
 
 

@@ -1,5 +1,6 @@
 import 'package:final_project/friend2.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class Friend extends StatefulWidget {
 
@@ -22,31 +23,34 @@ class _FriendState extends State<Friend> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Flexible(
-                  flex: 2,
+                  flex: 5,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    height: 500.h,
+                      padding: EdgeInsets.all(3.h),
                     child: Center(
-                        child: Text('Player 1', style: TextStyle(color: Colors.black, fontSize: 75.0, fontFamily: 'Popkorn'))
+                        child: Text('Player 1', style: TextStyle(color: Colors.black, fontSize: 10.h, fontFamily: 'Popkorn'))
                     ),
                   ),
                 ),
 
                 Flexible(
-                  flex: 1,
+                  flex: 2,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(0,5,0,70),
+                    height: 10.h,
+                    padding: EdgeInsets.fromLTRB(3.w, 1.h, 3.w, 1.h),
                     child: Center(
                         child: Text('choose   your   character ',
-                            style: TextStyle(color: Colors.white, fontSize: 25.0, fontFamily: 'ArcadeF'))
+                            style: TextStyle(color: Colors.white, fontSize: 3.5.h, fontFamily: 'ArcadeF'))
                     ),
                   ),
                 ),
                 Flexible(
-                  flex: 2,
+                  flex: 5,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(0,10,0,60),
+                    height: 100.h,
+                    padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         GestureDetector(
                           onTap: () {
@@ -58,7 +62,7 @@ class _FriendState extends State<Friend> {
                           },
                           child: CircleAvatar(
                             backgroundImage: AssetImage('assets/Dolly.png'),
-                            radius: 60.0,
+                            radius: 8.0.h,
                           ),
 
                         ),
@@ -72,7 +76,7 @@ class _FriendState extends State<Friend> {
                           },
                           child: CircleAvatar(
                             backgroundImage: AssetImage('assets/Mantilla.jpg'),
-                            radius: 60.0,
+                            radius: 8.0.h,
                           ),
 
                         ),
@@ -81,11 +85,11 @@ class _FriendState extends State<Friend> {
                   ),
                 ),
                 Flexible(
-                  flex: 2,
+                  flex: 5,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(0,10,0,10),
+                    padding: EdgeInsets.fromLTRB(3.w, 3.h, 3.w, 3.h),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         GestureDetector(
                           onTap: () {
@@ -97,7 +101,7 @@ class _FriendState extends State<Friend> {
                           },
                           child: CircleAvatar(
                             backgroundImage: AssetImage('assets/Jalopez.png'),
-                            radius: 60.0,
+                            radius: 8.0.h,
                           ),
 
                         ),
@@ -111,7 +115,7 @@ class _FriendState extends State<Friend> {
                           },
                           child: CircleAvatar(
                             backgroundImage: AssetImage('assets/Jonatan.jpg'),
-                            radius: 60.0,
+                            radius: 8.0.h,
                           ),
 
                         ),
