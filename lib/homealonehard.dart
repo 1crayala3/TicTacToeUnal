@@ -2,6 +2,7 @@ import 'package:final_project/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:sizer/sizer.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class BoardAloneJZ extends StatefulWidget {
   final String characterP1, avatarP1;
@@ -35,6 +36,7 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
   var random = new Random();
   bool someoneWon = false;
   bool _deactTch = false;
+  final audioplyr = AudioCache();
 
   @override
   Widget build(BuildContext context) {
@@ -276,9 +278,23 @@ class _BoardAloneJZState extends State<BoardAloneJZ> {
 
       defColor = Colors.lightGreen;
 
+      if (widget.characterP1 == 'Dolly'){
+        audioplyr.play('Dolly.mp3');
+      }
+      else if (widget.characterP1 == 'Mantilla'){
+        audioplyr.play('Mantilla.mp3');
+      }
+      else if (widget.characterP1 == 'Jalopez'){
+        audioplyr.play('Jalopez.mp3');
+      }
+      else if (widget.characterP1 == 'Jonatan'){
+        audioplyr.play('Jonatan.mp3');
+      }
+
     } else {
 
       defColor = Colors.redAccent;
+      audioplyr.play('Uribe.mp3');
 
     }
 

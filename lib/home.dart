@@ -1,6 +1,7 @@
 import 'package:final_project/main.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class BoardFriend extends StatefulWidget {
   final String characterP2, characterP1, avatarP1, avatarP2;
@@ -33,7 +34,7 @@ class _BoardFriendState extends State<BoardFriend> {
   int xScr = 0;
   int oScr = 0;
   int drawCount = 0;
-  //String character = '';
+  final audioplyr = AudioCache();
 
   @override
   Widget build(BuildContext context) {
@@ -248,9 +249,35 @@ class _BoardFriendState extends State<BoardFriend> {
 
       defColor = Colors.lightGreen;
 
+      if (widget.characterP1 == 'Dolly'){
+        audioplyr.play('Dolly.mp3');
+      }
+      else if (widget.characterP1 == 'Mantilla'){
+        audioplyr.play('Mantilla.mp3');
+      }
+      else if (widget.characterP1 == 'Jalopez'){
+        audioplyr.play('Jalopez.mp3');
+      }
+      else if (widget.characterP1 == 'Jonatan'){
+        audioplyr.play('Jonatan.mp3');
+      }
+
     } else if (defeater == widget.characterP2){
 
       defColor = Colors.green;
+
+      if (widget.characterP2 == 'Dolly'){
+        audioplyr.play('Dolly.mp3');
+      }
+      else if (widget.characterP2 == 'Mantilla'){
+        audioplyr.play('Mantilla.mp3');
+      }
+      else if (widget.characterP2 == 'Jalopez'){
+        audioplyr.play('Jalopez.mp3');
+      }
+      else if (widget.characterP2 == 'Jonatan'){
+        audioplyr.play('Jonatan.mp3');
+      }
 
     }
 

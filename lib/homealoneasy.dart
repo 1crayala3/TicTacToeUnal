@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:sizer/sizer.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class BoardAlonePrim extends StatefulWidget {
   final String characterP1, avatarP1;
@@ -36,6 +37,9 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
   var random = new Random();
   bool someoneWon = false;
   bool _deactTch = false;
+  final audioplyr = AudioCache();
+  bool mchnBlckFlg = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +132,7 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: (){
+
                             touched(index);
 
                           },
@@ -183,11 +188,13 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
 
       someoneWon = false;
       _deactTch = true;
+      mchnBlckFlg = false;
 
       if (exOrO[n] == ''){
         exOrO[n] = 'X';
         turn++;
         drawCount++;
+        mchnBlckFlg = true;
       }
 
       victory();
@@ -199,7 +206,7 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
 
       setState(() {
 
-        if(someoneWon == false){
+        if(someoneWon == false && mchnBlckFlg == true){
 
           dumbMachine();
           victory();
@@ -271,18 +278,34 @@ class _BoardAlonePrimState extends State<BoardAlonePrim> {
 
     Color defColor = Colors.white;
 
-
     if (defeater == widget.characterP1){
 
       defColor = Colors.lightGreen;
 
+      if (widget.characterP1 == 'Dolly'){
+        audioplyr.play('Dolly.mp3');
+      }
+      else if (widget.characterP1 == 'Mantilla'){
+        audioplyr.play('Mantilla.mp3');
+      }
+      else if (widget.characterP1 == 'Jalopez'){
+        audioplyr.play('Jalopez.mp3');
+      }
+      else if (widget.characterP1 == 'Jonatan'){
+        audioplyr.play('Jonatan.mp3');
+      }
+
     } else {
 
       defColor = Colors.redAccent;
+      audioplyr.play('Duque.mp3');
 
     }
 
+
+
     showDialog(barrierDismissible: false, context: context, builder: (BuildContext context){
+
       return AlertDialog(
         titlePadding: EdgeInsets.all(3.h),
         actionsPadding: EdgeInsets.all(0.1.h),
